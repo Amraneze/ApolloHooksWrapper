@@ -1,2 +1,0 @@
-# ApolloHooksWrapper
-Created with CodeSandbox

@@ -1,0 +1,20 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.TodoContainer {
+  display: flex;
+  justify-content: space-between;
+  width: auto;
+  margin-top: 2rem;
+  font-size: 1.3rem;
+  border-radius: 4px;
+  padding: 5px;
+}
+
+.TodoButton {
+  padding: 1.2rem 1rem;
+  border-radius: 4px;
+  color: white;
+}
