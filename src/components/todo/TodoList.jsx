@@ -1,8 +1,8 @@
 import React from "react";
-import { useQuery, gql } from "@apollo/client";
+import { gql } from "@apollo/client";
 import styled from "styled-components";
 
-import Todo from "./Todo";
+import { Todo, QueryWrapper } from "../";
 
 const GET_TODO_LIST = gql`
   query GetTodoList {
@@ -15,18 +15,16 @@ const GET_TODO_LIST = gql`
 `;
 
 export default function TodoList(props) {
-  const { data, error, loading } = useQuery(GET_TODO_LIST);
-
-  if (error) return <h1>Error...</h1>;
-  if (loading) return <h1>loading...</h1>;
-
-  const { todos } = data;
   return (
     <TodoListContainer>
-      {todos.map(todo => {
-        const { id } = todo;
-        return <Todo key={id} {...todo} />;
-      })}
+      <QueryWrapper query={GET_TODO_LIST}>
+        {({ data: { todos } }) => {
+          return todos.map(todo => {
+            const { id } = todo;
+            return <Todo key={id} {...todo} />;
+          });
+        }}
+      </QueryWrapper>
     </TodoListContainer>
   );
 }

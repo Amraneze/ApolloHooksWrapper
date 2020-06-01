@@ -3,7 +3,11 @@ import PropTypes from "prop-types";
 import { useSubscription } from "@apollo/react-hooks";
 import { Suspense, Dialog } from "../";
 
-export default function SubscriptionWrapper({ url, query, options, children }) {
+export default function SubscriptionWrapper({
+  subscription,
+  options,
+  children
+}) {
   if (options.pollInterval) {
     options.pollInterval = options.skip ? 0 : options.pollInterval;
   }
@@ -14,7 +18,7 @@ export default function SubscriptionWrapper({ url, query, options, children }) {
     fetchMore,
     subscribeToMore,
     stopPolling
-  } = useSubscription(query, options);
+  } = useSubscription(subscription, options);
 
   if (loading) {
     return <Suspense isLoading={true} />;
@@ -33,8 +37,6 @@ SubscriptionWrapper.defaultProps = {
 
 SubscriptionWrapper.propTypes = {
   options: PropTypes.object,
-  url: PropTypes.string.isRequired,
-  query: PropTypes.object.isRequired,
   children: PropTypes.func.isRequired,
-  translate: PropTypes.func.isRequired
+  subscription: PropTypes.object.isRequired
 };

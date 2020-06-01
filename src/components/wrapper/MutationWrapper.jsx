@@ -4,7 +4,7 @@ import { useMutation } from "@apollo/react-hooks";
 
 import { Suspense, Dialog } from "../";
 
-export default function MutationWrapper({ onUpdate, url, mutation, options }) {
+export default function MutationWrapper({ onUpdate, mutation, options }) {
   const [update, { loading, error }] = useMutation(mutation, options);
 
   React.useEffect(() => {
@@ -26,8 +26,6 @@ MutationWrapper.defaultProps = {
 
 MutationWrapper.propTypes = {
   options: PropTypes.object,
-  url: PropTypes.string.isRequired,
   onUpdate: PropTypes.func.isRequired,
-  translate: PropTypes.func.isRequired,
   mutation: PropTypes.object.isRequired
 };

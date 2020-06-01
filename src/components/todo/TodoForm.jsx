@@ -1,6 +1,7 @@
 import React from "react";
-import { useMutation, gql } from "@apollo/client";
+import { gql } from "@apollo/client";
 import styled from "styled-components";
+import { MutationWrapper } from "../";
 
 const ADD_TODO = gql`
   mutation AddTodo($text: String!) {
@@ -11,11 +12,13 @@ const ADD_TODO = gql`
 `;
 
 export default function TodoForm(props) {
-  const [addTodo] = useMutation(ADD_TODO);
   const [input, setInput] = React.useState();
+  const [addTodo, updateAddTodo] = React.useState(() => {});
+
   return (
     <TodoFormContainer>
       <h1>Todos</h1>
+      <MutationWrapper mutation={ADD_TODO} onUpdate={updateAddTodo} />
       <StyledForm
         onSubmit={e => {
           e.preventDefault();

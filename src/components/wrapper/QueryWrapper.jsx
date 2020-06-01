@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useQuery } from "@apollo/react-hooks";
 import { Suspense, Dialog } from "../";
 
-export default function QueryWrapper({ url, query, options, children }) {
+export default function QueryWrapper({ query, options, children }) {
   if (options.pollInterval) {
     options.pollInterval = options.skip ? 0 : options.pollInterval;
   }
@@ -33,8 +33,6 @@ QueryWrapper.defaultProps = {
 
 QueryWrapper.propTypes = {
   options: PropTypes.object,
-  url: PropTypes.string.isRequired,
   query: PropTypes.object.isRequired,
-  children: PropTypes.func.isRequired,
-  translate: PropTypes.func.isRequired
+  children: PropTypes.func.isRequired
 };

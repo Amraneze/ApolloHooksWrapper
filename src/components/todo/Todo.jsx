@@ -1,6 +1,7 @@
 import React from "react";
-import { useMutation, gql } from "@apollo/client";
+import { gql } from "@apollo/client";
 import styled from "styled-components";
+import { MutationWrapper } from "../";
 
 const REMOVE_TODO = gql`
   mutation RemoveTodo($id: ID!) {
@@ -16,20 +17,29 @@ const TOGGLE_TODO = gql`
 
 export default function Todo(props) {
   const { id, text, isCompleted } = props;
+  const [toggleTodo, updateToggleTodo] = React.useState(() => {});
+  const [removeTodo, updateRemoveTodo] = React.useState(() => {});
 
-  const [toggleTodo] = useMutation(TOGGLE_TODO, {
-    variables: {
-      id
-    }
-  });
-
-  const [removeTodo] = useMutation(REMOVE_TODO, {
-    variables: {
-      id
-    }
-  });
   return (
     <TodoContainer key={id}>
+      <MutationWrapper
+        mutation={TOGGLE_TODO}
+        onUpdate={updateToggleTodo}
+        options={{
+          variables: {
+            id
+          }
+        }}
+      />
+      <MutationWrapper
+        mutation={REMOVE_TODO}
+        onUpdate={updateRemoveTodo}
+        options={{
+          variables: {
+            id
+          }
+        }}
+      />
       <p
         style={{
           textDecoration: isCompleted ? "line-through" : "none"
@@ -38,8 +48,8 @@ export default function Todo(props) {
         {text}
       </p>
       <div>
-        <TodoButton onClick={() => toggleTodo()}>Complete</TodoButton>
-        <TodoButton danger onClick={() => removeTodo()}>
+        <TodoButton onClick={toggleTodo}>Complete</TodoButton>
+        <TodoButton danger onClick={removeTodo}>
           Delete
         </TodoButton>
       </div>

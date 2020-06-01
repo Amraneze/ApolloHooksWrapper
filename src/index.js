@@ -1,7 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import ApolloClient from "apollo-client";
-import { ApolloProvider, InMemoryCache } from "@apollo/client";
+import { InMemoryCache } from "@apollo/client";
+import { ApolloProvider } from "@apollo/react-hooks";
 import resolvers from "./apollo/resolvers";
 import typeDefs from "./apollo/schema";
 import App from "./App";
